@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaksi Onokosy Galaxy ✨</title>
+
+  <!-- Font kece -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: url("https://files.catbox.moe/cj0oda.gif") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      overflow: hidden;
+      transition: background 1s ease, background-image 1s ease;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.05);
+      border: 2px solid rgba(255, 182, 255, 0.6);
+      border-radius: 25px;
+      padding: 20px;
+      width: 360px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      animation: float 4s ease-in-out infinite;
+      transition: transform 0.3s ease, width 0.3s ease;
+      box-shadow: 
+        -10px -10px 25px rgba(255,182,255,0.3),
+         10px  10px 25px rgba(243,104,224,0.3);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 15px;
+      animation: spin 10s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin: 15px 0;
+      color: #ffbaff;
+      text-shadow: 0 0 10px #ff9ff3, 0 0 20px #f368e0;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin: 10px 0;
+      color: #ffe4ff;
+      text-shadow: 0 0 5px #f368e0;
+    }
+
+    .cute-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff9ff3, #f368e0);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 15px;
+      margin: 10px 0;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: transform 0.2s;
+      border: none;
+    }
+
+    .cute-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Settings panel */
+    .settings {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 3;
+    }
+
+    .settings-btn {
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .settings-panel {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background: rgba(0,0,0,0.8);
+      padding: 15px;
+      border-radius: 15px;
+      color: #fff;
+      width: 240px;
+      box-shadow: 0 0 15px rgba(255,182,255,0.6);
+    }
+
+    .settings-panel h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .option {
+      margin: 10px 0;
+    }
+
+    label {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Settings -->
+  <div class="settings">
+    <button class="settings-btn" onclick="toggleSettings()">⚙️</button>
+    <div class="settings-panel" id="settingsPanel">
+      <h3>⚡ Pengaturan</h3>
+      <div class="option">
+        <label>Tema:</label>
+        <select id="themeSelect" onchange="changeTheme()">
+          <option value="default">🌌 Default (GIF Angkasa)</option>
+          <option value="galaxy">🌠 Onokosy Galaxy</option>
+          <option value="pink">🌸 Pink Galaxy</option>
+          <option value="blue">💙 Blue Space</option>
+          <option value="green">🌿 Cosmic Green</option>
+          <option value="auto">🌈 Auto Warna</option>
+        </select>
+      </div>
+      <div class="option">
+        <label><input type="checkbox" id="fhdToggle" onchange="toggleFHD()"> FHD Mode</label>
+      </div>
+      <div class="option">
+        <label><input type="checkbox" id="fpsToggle" onchange="toggleFPS()"> FPS 120</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card -->
+  <div class="card">
+    <img class="logo" src="https://files.catbox.moe/e2ke3v.gif" alt="Logo Imut">
+    <h1>Transaksi Onokosy Galaxy ✨</h1>
+    <p>💳 Payment: <b>ZasXCar</b></p>
+    <p>📱 Dana: <b>085811965685</b></p>
+    <button class="cute-btn" onclick="showQuote()">Cek Status 🚀</button>
+    <p id="quote">🌌 Transaksi Onokosy galaxy sedang diproses...</p>
+  </div>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const quotes = [
+      "🚀 Transaksi Onokosy galaxy sedang meluncur ke orbit… tunggu sebentar ya 🌌✨",
+      "🌙 Pembayaranmu diterima, bintang terang sudah jadi milikmu 💖",
+      "🪐 Dana mendarat mulus di planet ZasXCar, terima kasih gemoy 🌸",
+      "☄️ Transaksi sukses! Nomor dana: 085811965685 🌟",
+      "✨ ZasXCar lagi senyum karena kamu barusan transfer 💕",
+      "🌌 Transaksi Onokosy galaxy complete, saldo kamu aman di semesta ✨",
+      "💫 Dikirim dengan kecepatan cahaya… pembayaran sukses 🚀",
+      "🌠 Terhubung ke Onokosy galaxy — transaksi selesai 🎉"
+    ];
+
+    function showQuote() {
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quote").innerText = random;
+
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+
+    function toggleSettings() {
+      const panel = document.getElementById("settingsPanel");
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    }
+
+    // Random warna helper
+    function randomColor() {
+      const letters = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    let colorInterval;
+    function startColorCycle() {
+      stopColorCycle();
+      colorInterval = setInterval(() => {
+        const c1 = randomColor();
+        const c2 = randomColor();
+        document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+      }, 3000);
+    }
+
+    function stopColorCycle() {
+      if (colorInterval) clearInterval(colorInterval);
+    }
+
+    function changeTheme() {
+      const theme = document.getElementById("themeSelect").value;
+      stopColorCycle();
+
+      if (theme === "galaxy") {
+        document.body.style.background = "url('https://files.catbox.moe/8uq64u.gif') no-repeat center center fixed";
+        document.body.style.backgroundSize = "cover";
+      } else if (theme === "pink") {
+        document.body.style.background = "linear-gradient(135deg,#ff9ff3,#f368e0)";
+      } else if (theme === "blue") {
+        document.body.style.background = "linear-gradient(135deg,#48dbfb,#0abde3)";
+      } else if (theme === "green") {
+        document.body.style.background = "linear-gradient(135deg,#55efc4,#00b894)";
+      } else if (theme === "auto") {
+        startColorCycle();
+      } else {
+        document.body.style.background = "url('https://files.catbox.moe/cj0oda.gif') no-repeat center center fixed";
+        document.body.style.backgroundSize = "cover";
+      }
+    }
+
+    function toggleFHD() {
+      const card = document.querySelector(".card");
+      if (document.getElementById("fhdToggle").checked) {
+        card.style.width = "500px";
+      } else {
+        card.style.width = "360px";
+      }
+    }
+
+    function toggleFPS() {
+      const card = document.querySelector(".card");
+      if (document.getElementById("fpsToggle").checked) {
+        card.style.animationDuration = "2s";
+      } else {
+        card.style.animationDuration = "4s";
+      }
+    }
+  </script>
+</body>
+</html>
